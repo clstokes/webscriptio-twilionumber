@@ -28,6 +28,8 @@ return response.friendly_name
 
 Webscript supports scheduling scripts as cron jobs. Create a new script from the code below and setup a cron job within Webscript.io to have the script check for available numbers and buy one once it's available.
 
+The URL format for the script below must be in the form *&lt;subdomain>.webscript.io/&lt;path>?AreaCode=&lt;area_code>*.
+
 # Example
 
 The script below requires an `AreaCode` query parameter and does the following:
