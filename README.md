@@ -1,6 +1,6 @@
 # webscriptio-twilionumber
 
-A Webscript module (https://www.webscript.io/) to find and buy available phone numbers from Twilio (https://www.twilio.com/).
+A Webscript module (https://www.webscript.io/) to find and buy an available phone number from Twilio (https://www.twilio.com/).
 
 # Usage
 
@@ -24,16 +24,20 @@ local response = twilio.buyNumber( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_
 return response.friendly_name
 ```
 
+# Usage on Webscript.io
+
+Webscript supports scheduling scripts as cron jobs. Create a new script from the code below and setup a cron job within Webscript.io to have the script check for available numbers and buy one once it's available.
+
 # Example
 
-The webscript below requires an `AreaCode` query parameter and does the following:
+The script below requires an `AreaCode` query parameter and does the following:
 
 1. If a number *was* found previously (based on the `alreadyFound` storage variable), the script exits with a simple message that a number was already found.
 1. If a number was *not* found previously, the script queries the Twilio API for available numbers within `AreaCode`.
 1. If an available number is *not* found, the script exits with a simple mesage that no numbers are available.
 1. If an available number *is* found, the script buys an available number within `AreaCode`, sets `alreadyFound` to `true`, then alerts the Webscript account owner with an SMS message.
 
-## Webscript 
+## Code
 
 ```lua
 if storage.alreadyFound then
