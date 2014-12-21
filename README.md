@@ -33,6 +33,8 @@ The webscript below requires an `AreaCode` query parameter and does the followin
 1. If an available number is *not* found, the script exits with a simple mesage that no numbers are available.
 1. If an available number *is* found, the script buys an available number within `AreaCode`, sets `alreadyFound` to `true`, then alerts the Webscript account owner with an SMS message.
 
+## Webscript 
+
 ```lua
 if storage.alreadyFound then
   return 'Already found a number. Stopping...'
