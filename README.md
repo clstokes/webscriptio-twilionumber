@@ -21,7 +21,7 @@ local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
 
 local response = twilio.buyNumber( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
 
-return response.
+return response.friendly_name
 ```
 
 # Example
