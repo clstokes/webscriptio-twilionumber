@@ -4,31 +4,13 @@ A Webscript module (https://www.webscript.io/) to find and buy an available phon
 
 # Usage
 
-This module exposes two functions: `findNumbers`, `buyNumber`, and `findAndBuyNumber`. All functions take the same input parameters: your twilio account sid, twilio auth token, and an area code.
-
-## Find Available Numbers by Area Code
-```
-local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
-
-local response = twilio.findNumbers( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
-
-return response.available_numbers
-```
+This module exposes one function, `buyNumber`, that takes your twilio account sid, twilio auth token, and an area code as method arguments.
 
 ## Buy an Available Number by Area Code
 ```
 local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
 
 local response = twilio.buyNumber( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
-
-return response.friendly_name
-```
-
-## Find and Buy an Available Number by Area Code
-```
-local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
-
-local response = twilio.findAndBuyNumber( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
 
 return response.friendly_name
 ```
@@ -64,17 +46,17 @@ end
 local twilioSid = 'YOUR_TWILIO_ACCOUNT_SID'
 local twilioToken = 'YOUR_TWILIO_AUTH_TOKEN'
 
-local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
+local twilio = require('clstokes/webscriptio-twilionumber/main')
 
-local number = twilio.findAndBuyNumber( twilioSid, twilioToken, areaCode )
+local boughtNumber = twilio.buyNumber(twilioSid, twilioToken, areaCode)
 
-if number ~= nil then
-  local txt = 'Just bought '..number.friendly_name..'. Go twilio!'
+if boughtNumber then
+  local txt = 'Just bought '..boughtNumber.friendly_name..'. Go twilio!'
   storage.alreadyFound = true
-  alert.sms( txt )
-  return txt
+  alert.sms(txt)
+else
+  local txt = '*No* phone numbers are available in the '..areaCode..' area code.'
 end
 
-local txt = '*No* phone numbers are available in the '..areaCode..' area code.'
 return txt
 ```
