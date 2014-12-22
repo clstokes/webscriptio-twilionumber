@@ -43,7 +43,6 @@ function findAndBuyNumber( twilioSid, twilioToken, areaCode )
   if count > 0 then
     -- local boughtNumber = buyNumber( twilioSid, twilioToken, areaCode )
     local boughtNumber = { friendly_name="TEST" }
-    storage.alreadyFound = true
     return boughtNumber
   end
 
