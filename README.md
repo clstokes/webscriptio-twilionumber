@@ -51,8 +51,8 @@ local twilio = require('clstokes/webscriptio-twilionumber/main')
 local boughtNumber = twilio.buyNumber(twilioSid, twilioToken, areaCode)
 
 if boughtNumber ~= nil then
-  local txt = 'Just bought '..boughtNumber.friendly_name..'. Go twilio!'
   storage.alreadyFound = true
+  local txt = 'Just bought '..boughtNumber.friendly_name..'. Go twilio!'
   alert.sms(txt)
   return txt
 end
