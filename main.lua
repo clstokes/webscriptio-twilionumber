@@ -41,8 +41,7 @@ function findAndBuyNumber( twilioSid, twilioToken, areaCode )
   local count = table.getn( numbers.available_phone_numbers )
 
   if count > 0 then
-    -- local boughtNumber = buyNumber( twilioSid, twilioToken, areaCode )
-    local boughtNumber = { friendly_name="TEST" }
+    local boughtNumber = buyNumber( twilioSid, twilioToken, areaCode )
     return boughtNumber
   end
 
