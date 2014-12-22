@@ -4,13 +4,13 @@ A Webscript module (https://www.webscript.io/) to find and buy an available phon
 
 # Usage
 
-This module exposes two functions: `getNumbers` and `buyNumber`. Both functions take the same input parameters: your twilio account sid, twilio auth token, and an area code.
+This module exposes two functions: `findNumbers`, `buyNumber`, and `findAndBuyNumber`. All functions take the same input parameters: your twilio account sid, twilio auth token, and an area code.
 
 ## Find Available Numbers by Area Code
 ```
 local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
 
-local response = twilio.getNumbers( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
+local response = twilio.findNumbers( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
 
 return response.available_numbers
 ```
@@ -20,6 +20,15 @@ return response.available_numbers
 local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
 
 local response = twilio.buyNumber( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
+
+return response.friendly_name
+```
+
+## Find and Buy an Available Number by Area Code
+```
+local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
+
+local response = twilio.findAndBuyNumber( 'YOUR_TWILIO_ACCOUNT_SID', 'YOUR_TWILIO_AUTH_TOKEN', 206 )
 
 return response.friendly_name
 ```
@@ -57,14 +66,10 @@ local twilioToken = 'YOUR_TWILIO_AUTH_TOKEN'
 
 local twilio = require( 'clstokes/webscriptio-twilionumber/main' )
 
-local numbers = twilio.getNumbers( twilioSid, twilioToken, areaCode )
+local number = twilio.findAndBuyNumber( twilioSid, twilioToken, areaCode )
 
-local count = table.getn( numbers.available_phone_numbers )
-
-if count > 0 then
-  local boughtNumber = twilio.buyNumber( twilioSid, twilioToken, areaCode )
-
-  local txt = 'Just bought '..boughtNumber.friendly_name..'. Go twilio!'
+if number ~= nil then
+  local txt = 'Just bought '..number.friendly_name..'. Go twilio!'
   storage.alreadyFound = true
   alert.sms( txt )
   return txt

@@ -1,5 +1,5 @@
--- get available numbers in an area code
-local getNumbers = function ( twilioSid, twilioToken, areaCode )
+-- find available numbers in an area code
+function findNumbers( twilioSid, twilioToken, areaCode )
 
   local response = http.request {
     url = string.format('https://api.twilio.com/2010-04-01/Accounts/%s/AvailablePhoneNumbers/US/Local.json', twilioSid),
@@ -18,7 +18,7 @@ local getNumbers = function ( twilioSid, twilioToken, areaCode )
 end
 
 -- buy an available number in an area code
-local buyNumber = function ( twilioSid, twilioToken, areaCode )
+function buyNumber( twilioSid, twilioToken, areaCode )
 
   local response = http.request {
     method = 'POST',
@@ -34,7 +34,25 @@ local buyNumber = function ( twilioSid, twilioToken, areaCode )
 
 end
 
+-- buys a number if it's available
+function findAndBuyNumber( twilioSid, twilioToken, areaCode )
+
+  local numbers = findNumbers( twilioSid, twilioToken, areaCode )
+  local count = table.getn( numbers.available_phone_numbers )
+
+  if count > 0 then
+    -- local boughtNumber = buyNumber( twilioSid, twilioToken, areaCode )
+    local boughtNumber = "TEST"
+    storage.alreadyFound = true
+    return boughtNumber
+  end
+
+  return nil
+
+end
+
 return {
-  getNumbers = getNumbers,
-  buyNumber = buyNumber
+  findNumbers = findNumbers,
+  buyNumber = buyNumber,
+  findAndBuyNumber = findAndBuyNumber
 }
