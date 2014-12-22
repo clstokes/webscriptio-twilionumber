@@ -50,13 +50,12 @@ local twilio = require('clstokes/webscriptio-twilionumber/main')
 
 local boughtNumber = twilio.buyNumber(twilioSid, twilioToken, areaCode)
 
-if boughtNumber then
+if boughtNumber ~= nil then
   local txt = 'Just bought '..boughtNumber.friendly_name..'. Go twilio!'
   storage.alreadyFound = true
   alert.sms(txt)
-else
-  local txt = '*No* phone numbers are available in the '..areaCode..' area code.'
+  return txt
 end
 
-return txt
+return '*No* phone numbers are available in the '..areaCode..' area code.'
 ```
