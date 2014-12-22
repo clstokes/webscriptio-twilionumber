@@ -8,7 +8,7 @@ function buyNumber(twilioSid, twilioToken, areaCode)
     data = { AreaCode = areaCode }
   }
 
-  if response.statuscode == 200 then
+  if response.statuscode == 201 then
     return json.parse(response.content)
   else
     return nil
